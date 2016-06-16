@@ -1,6 +1,6 @@
 <?php
 use yii\helpers\Url;
-use app\module\ticket\models\TicketHead;
+use ricco\ticket\models\TicketHead;
 
 $this->title = 'Support';
 
