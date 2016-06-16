@@ -1,0 +1,25 @@
+{
+    "name": "ricco/yii2-ticket",
+    "description": "A ticket system for website",
+    "keywords": ["yii2", "yii2-ticket", "ticket system", "ricco"],
+    "type": "yii2-extension",
+    "license": "MIT",
+    "minimum-stability": ">=1.0",
+    "homepage": "https://github.com/ricco381/yii2-ticket",
+    "authors": [
+        {
+            "name": "ricco381",
+            "email": "ricco381@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "yiisoft/yii2": ">=2.0.5",
+        "dektrium/yii2-user": "0.9.*@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "ricco\\ticket\\": ""
+        }
+    }
+}
