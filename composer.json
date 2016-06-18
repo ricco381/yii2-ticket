@@ -13,7 +13,6 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "yiisoft/yii2": ">=2.0.5",
         "dektrium/yii2-user": "0.9.*@dev"
     },
     "autoload": {
