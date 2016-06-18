@@ -1,7 +1,7 @@
 # yii2-ticket
 Тикет система для yii2
 
-##### Модуль в разработке, пока нет миграции и есть куча недоделок:)
+##### Модуль в разработке:)
 
 ```
 Установка через composer "composer require ricco/yii2-ticket"
@@ -54,6 +54,11 @@
 > TicketHead::getNewTicketCountUser($status)
 
 Возвращает количество текетов для текущего пользователя, по умолчанию со всеми статусами которые равняются "0"
+
+# Миграция
+```
+yii migrate --migrationPath=@vendor/ricco/yii2-ticket/migrations
+```
 
 # Ностройка модуля
 ```
