@@ -20,13 +20,13 @@ class Module extends \yii\base\Module
 
     /** @var bool Уведомление пользователя о закрытии тикета */
     public $mailSendClosed = false;
-    
+
     /** @var string Тема email сообщения когда пользователю приходит ответ */
     public $subjectAnswer = 'Ответ на тикет';
-    
+
     /** @var string Тема email сообщения когда тикет пользователя закрыт */
     public $subjectCloset = 'Ваш тикет был закрыт';
-    
+
     /**
      * @inheritdoc
      */
