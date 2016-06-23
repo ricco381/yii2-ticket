@@ -4,8 +4,7 @@
     "keywords": ["yii2", "yii2-ticket", "ticket system", "ricco"],
     "type": "yii2-extension",
     "license": "MIT",
-    "minimum-stability": ">=1.0",
-    "homepage": "https://github.com/ricco381/yii2-ticket",
+    "homepage": "https://bitbucket.org/Ricco381/yii2-ticket/src",
     "authors": [
         {
             "name": "ricco381",
@@ -14,7 +13,6 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "yiisoft/yii2": ">=2.0.5",
         "dektrium/yii2-user": "0.9.*@dev"
     },
     "autoload": {

@@ -40,52 +40,72 @@ class TicketController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = (new TicketHead())->dataProvider();
+        $dataProvider = (new TicketHead())->dataProviderUser();
         Url::remember();
         return $this->render('index', ['dataProvider' => $dataProvider]);
     }
 
+    /**
+     * Делается выборка тела тикета по id и отображаем данные
+     * Если пришел пустой результат показываем список тикетов
+     * Создаем экземпляр новой модели тикета
+     * К нам пришел пост делаем загрузку в модель и проходим валидацию, если все хорошо делаем выборку шапки, меняем ей статус и сохраняем
+     * Записываем id тикета новому ответу чтоб не потерялся и сохроняем новый ответ
+     * 
+     * @param $id
+     * @return string
+     */
     public function actionView($id)
     {
-        $model = TicketBody::find()->where(['id_head' => $id])->orderBy('date DESC')->all();
+        $thisTicket = TicketBody::find()->where(['id_head' => $id])->orderBy('date DESC')->all();
 
-        if (!$model) {
+        if (!$thisTicket) {
             return $this->actionIndex();
         }
 
-        $newModel = new TicketBody();
+        $newTicket = new TicketBody();
 
-        if (\Yii::$app->request->post() && $newModel->load(\Yii::$app->request->post()) && $newModel->validate()) {
+        if (\Yii::$app->request->post() && $newTicket->load(\Yii::$app->request->post()) && $newTicket->validate()) {
             $ticket = TicketHead::findOne($id);
             $ticket->status = 1;
             if ($ticket->save()) {
-                $newModel->id_head = $id;
-                $newModel->save();
+                $newTicket->id_head = $id;
+                $newTicket->save();
             }
 
             $this->redirect(Url::to());
         }
 
-        return $this->render('view', ['model' => $model, 'new' => $newModel]);
+        return $this->render('view', ['thisTicket' => $thisTicket, 'newTicket' => $newTicket]);
     }
 
+    /**
+     * Создаем два экземпляра
+     * 1. Шапка тикета
+     * 2. Тело тикета
+     * Делаем рендеринг страницы
+     * Если post, проводим загрузку данных в модели, делаем валидацию
+     * Сохраняем сначало шапку, узнаем его id, этот id присваеваем телу сообщения чтоб не потерялось и сохраняем
+     * 
+     * @return string|\yii\web\Response
+     */
     public function actionOpen()
     {
-        $tisketHead = new TicketHead();
-        $tisketBody = new TicketBody();
+        $ticketHead = new TicketHead();
+        $ticketBody = new TicketBody();
 
         if(\Yii::$app->request->post()) {
-            $tisketHead->load(\Yii::$app->request->post());
-            $tisketBody->load(\Yii::$app->request->post());
+            $ticketHead->load(\Yii::$app->request->post());
+            $ticketBody->load(\Yii::$app->request->post());
 
-            if ($tisketBody->validate() && $tisketHead->validate()) {
-                $tisketHead->save();
-                $tisketBody->id_head = $tisketHead->getPrimaryKey();
-                $tisketBody->save();
+            if ($ticketBody->validate() && $ticketHead->validate()) {
+                $ticketHead->save();
+                $ticketBody->id_head = $ticketHead->getPrimaryKey();
+                $ticketBody->save();
                 return $this->redirect(Url::previous());
             }
         }
 
-        return $this->render('open', ['tisketHead' => $tisketHead, 'tisketBody' => $tisketBody]);
+        return $this->render('open', ['ticketHead' => $ticketHead, 'ticketBody' => $ticketBody, 'qq' => $this->module->qq]);
     }
 }

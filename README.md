@@ -1,7 +1,7 @@
 # yii2-ticket
 Тикет система для yii2
 
-##### Модуль в разработке, пока нет миграции и есть куча недоделок:)
+##### Модуль в разработке:)
 
 ```
 Установка через composer "composer require ricco/yii2-ticket"
@@ -55,6 +55,21 @@
 
 Возвращает количество текетов для текущего пользователя, по умолчанию со всеми статусами которые равняются "0"
 
+# Миграция
+```
+yii migrate --migrationPath=@vendor/ricco/yii2-ticket/migrations
+```
+
+# Ностройка модуля
+```
+$mailSendAnswer = true на email пользователя будут отправлятся уведомления об ответе
+
+$mailSendClosed = true на email пользователя будут отправлятся уведомления о закрытии тикета
+
+$subjectAnswer = string Тиема email сообщения answer
+
+$subjectCloset = string Тема email сообщения closed
+```
 
 # Публичная часть
 ![](http://i.imgur.com/AAptr3g.png)
@@ -62,11 +77,9 @@
 # Создание тикета
 ![](http://i.imgur.com/D07htEF.png)
 
-# Вопрос-Ответ
+#Вопрос-Ответ
 ![](http://i.imgur.com/BkFcjJ2.png)
 
-# Админка
-Все тикеты
+#Админка
 ![](http://i.imgur.com/kD57GiP.png)
-Ответ
 ![](http://i.imgur.com/HMrZFZu.png)

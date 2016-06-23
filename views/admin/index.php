@@ -1,3 +1,7 @@
+<?php
+/** @var \ricco\ticket\models\TicketHead $dataProvider */
+?>
+
 <div class="mainpanel">
     <div class="pageheader">
         <div class="media">
@@ -7,14 +11,16 @@
         </div><!-- media -->
     </div><!-- pageheader -->
     <div class="contentpanel">
+        <a href="<?=\yii\helpers\Url::to(['/ticket/admin/open'])?>" class="btn btn-default">Написать</a>
+        <br><br>
         <div class="container-fluid">
             <div class="col-md-12">
                 <?= \yii\grid\GridView::widget([
                     'dataProvider' => $dataProvider,
                     'columns'      => [
                         [
-                            'attribute' => 'user',
-                            'value'     => 'user.username',
+                            'attribute' => 'userName',
+                            'value'     => 'userName.username',
                         ],
                         [
                             'attribute' => 'department',
