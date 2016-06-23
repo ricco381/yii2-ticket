@@ -1,2 +1,13 @@
+<<<<<<< HEAD
 .idea
 vendor
+=======
+<<<<<<< HEAD
+.idea
+.git
+vendor
+composer.lock
+=======
+.idea
+>>>>>>> c29cb65361a3784ac5407dd5d1ce8fcef6bc16ac
+>>>>>>> b738406be0bad78848adc62836acbe128367e42b
