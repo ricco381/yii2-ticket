@@ -113,7 +113,7 @@ class AdminController extends Controller
     {
         TicketHead::findOne($id)->delete();
 
-        return $this->redirect(Url::previous());
+        return $this->redirect(Url::to(['/ticket/admin/index']));
     }
 
     public function actionOpen()

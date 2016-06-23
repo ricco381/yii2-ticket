@@ -79,6 +79,11 @@ class TicketHead extends \yii\db\ActiveRecord
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'date_update' => SORT_DESC
+                ]
+            ],
         ]);
 
         return $dataProvider;
