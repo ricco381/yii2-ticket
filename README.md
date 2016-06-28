@@ -4,7 +4,7 @@
 ##### Вышла стабильная версия 1.0.1
 
 ```
-Установка через composer    'composer require "ricco/yii2-ticket: 1.0.1'
+Установка composer require "ricco/yii2-ticket: 1.0.1"
 ```
 
 # Добавление в проект
