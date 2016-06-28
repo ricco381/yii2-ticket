@@ -28,7 +28,7 @@ class Module extends \yii\base\Module
     public $subjectCloset = 'Ваш тикет был закрыт';
 
     /** @var  User */
-    public $userModule = \yii\web\User::class;
+    public $userModel = \yii\web\User::class;
 
     public $qq = [
         'Вопрос  по обмену' => 'Вопрос  по обмену',
@@ -43,7 +43,7 @@ class Module extends \yii\base\Module
      */
     public function init()
     {
-        User::$user = $this->userModule;
+        User::$user = $this->userModel;
         parent::init();
     }
 }
