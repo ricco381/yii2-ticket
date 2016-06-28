@@ -69,6 +69,10 @@ $mailSendClosed = true на email пользователя будут отпра
 $subjectAnswer = string Тиема email сообщения answer
 
 $subjectCloset = string Тема email сообщения closed
+
+$userModule = Object User model
+
+$qq = array Массив отделов для которых создается вопрос
 ```
 
 # Публичная часть
