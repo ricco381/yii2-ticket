@@ -1,10 +1,10 @@
 # yii2-ticket
 Тикет система для yii2
 
-##### Модуль в разработке:)
+##### Вышла стабильная версия 1.0.1
 
 ```
-Установка через composer "composer require ricco/yii2-ticket"
+Установка через composer    'composer require "ricco/yii2-ticket: 1.0.1'
 ```
 
 # Добавление в проект
@@ -81,5 +81,8 @@ $subjectCloset = string Тема email сообщения closed
 ![](http://i.imgur.com/BkFcjJ2.png)
 
 #Админка
-![](http://i.imgur.com/kD57GiP.png)
+![](http://i.imgur.com/r6veOiH.png)
+#Ответ
 ![](http://i.imgur.com/HMrZFZu.png)
+#Создание тикета
+![](http://i.imgur.com/KtT3oeP.png)
