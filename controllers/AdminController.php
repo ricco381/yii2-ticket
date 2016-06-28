@@ -2,12 +2,12 @@
 
 namespace ricco\ticket\controllers;
 
-use dektrium\user\models\User;
 use ricco\ticket\Mailer;
 use ricco\ticket\models\TicketBody;
 use ricco\ticket\models\TicketHead;
+use ricco\ticket\models\User;
 use ricco\ticket\Module;
-use yii\data\ActiveDataProvider;
+use Yii;
 use yii\helpers\Url;
 use yii\web\Controller;
 
@@ -16,7 +16,6 @@ use yii\web\Controller;
  */
 class AdminController extends Controller
 {
-
     /**
      * Выдорка всех тикетов
      * Сортировка по полю дата в обратном порядке
@@ -56,10 +55,11 @@ class AdminController extends Controller
 
                 if ($ticketHead->save()) {
                     if ($this->module->mailSendAnswer !== false) {
+                        $userModel = User::$user;
                         (new Mailer())
                             ->sendMailDataTicket($ticketHead['topic'], $ticketHead['status'], $newTicket->id_head,
                                 $newTicket->text)
-                            ->setDataFrom(User::findOne([
+                            ->setDataFrom($userModel::findOne([
                                 'id' => $ticketHead->user_id,
                             ])['email'],
                                 $this->module->subjectAnswer
@@ -90,9 +90,11 @@ class AdminController extends Controller
 
         if ($model->save()) {
             if ($this->module->mailSendClosed !== false) {
+                $userModel = User::$user;
+
                 (new Mailer())
                     ->sendMailDataTicket($model->department, $model->status, $model->id)
-                    ->setDataFrom(User::findOne([
+                    ->setDataFrom($userModel::findOne([
                         'id' => $model->user_id,
                     ])['email'],
                         $this->module->subjectCloset
@@ -120,7 +122,10 @@ class AdminController extends Controller
     {
         $ticketHead = new TicketHead();
         $ticketBody = new TicketBody();
-        $users = User::find()->select(['username as value', 'username as label', 'id as id'])->asArray()->all();
+
+        $user = $this->module->userModule;
+
+        $users = $user::find()->select(['username as value', 'username as label', 'id as id'])->asArray()->all();
 
         if ($post = \Yii::$app->request->post()) {
             $ticketHead->load($post);

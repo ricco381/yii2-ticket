@@ -2,9 +2,6 @@
 
 namespace ricco\ticket\models;
 
-use dektrium\user\models\User;
-use ricco\ticket\Mailer;
-use ricco\ticket\Module;
 use Yii;
 
 /**

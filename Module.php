@@ -2,6 +2,7 @@
 
 namespace ricco\ticket;
 
+use ricco\ticket\models\User;
 use Yii;
 
 /**
@@ -26,12 +27,15 @@ class Module extends \yii\base\Module
     /** @var string Тема email сообщения когда тикет пользователя закрыт */
     public $subjectCloset = 'Ваш тикет был закрыт';
 
+    /** @var  User */
+    public $userModule = \yii\web\User::class;
+
     public $qq = [
         'Вопрос  по обмену' => 'Вопрос  по обмену',
         'Пополнению ЛК'     => 'Пополнению ЛК',
         'Вводу средств'     => 'Вводу средств',
         'Выводу средств'    => 'Выводу средств',
-        'Другое'            => 'Другое'
+        'Другое'            => 'Другое',
     ];
 
     /**
@@ -39,6 +43,7 @@ class Module extends \yii\base\Module
      */
     public function init()
     {
+        User::$user = $this->userModule;
         parent::init();
     }
 }

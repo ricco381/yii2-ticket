@@ -2,11 +2,10 @@
 
 namespace ricco\ticket\controllers;
 
-use ricco\ticket\models\Ticket;
 use ricco\ticket\models\TicketBody;
 use ricco\ticket\models\TicketHead;
 use yii\filters\AccessControl;
-use dektrium\user\filters\AccessRule;
+use yii\filters\AccessRule;
 use yii\helpers\Url;
 use yii\web\Controller;
 

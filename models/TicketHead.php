@@ -2,12 +2,9 @@
 
 namespace ricco\ticket\models;
 
-use dektrium\user\models\User;
-use ricco\ticket\Mailer;
-use ricco\ticket\Module;
+use \ricco\ticket\models;
 use Yii;
 use yii\data\ActiveDataProvider;
-use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "ticket_head".
@@ -23,7 +20,7 @@ class TicketHead extends \yii\db\ActiveRecord
 {
     
     public $user = false;
-    
+
     /**
      * Статусы тикетов
      */
@@ -114,7 +111,8 @@ class TicketHead extends \yii\db\ActiveRecord
     
     public function getUserName()
     {
-        return $this->hasOne(User::className(), ['id' => 'user_id']);
+        $userModel = User::$user;
+        return $this->hasOne($userModel, ['id' => 'user_id']);
     }
 
     public function getBody()
