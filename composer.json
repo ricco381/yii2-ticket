@@ -13,8 +13,7 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0",
-        "dektrium/yii2-user": "0.9.*@dev"
+        "php": ">=5.4.0"
     },
     "autoload": {
         "psr-4": {
