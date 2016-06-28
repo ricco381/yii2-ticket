@@ -4,7 +4,7 @@
     "keywords": ["yii2", "yii2-ticket", "ticket system", "ricco"],
     "type": "yii2-extension",
     "license": "MIT",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "homepage": "https://bitbucket.org/Ricco381/yii2-ticket/src",
     "authors": [
         {
