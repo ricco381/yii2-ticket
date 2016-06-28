@@ -72,7 +72,7 @@ $subjectCloset = string Тема email сообщения closed
 
 $userModel = Object User model
 
-$qq = array Массив отделов для которых создается вопрос
+$qq = argit ray Массив отделов для которых создается вопрос
 ```
 
 # Публичная часть
