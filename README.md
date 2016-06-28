@@ -70,7 +70,7 @@ $subjectAnswer = string Тиема email сообщения answer
 
 $subjectCloset = string Тема email сообщения closed
 
-$userModule = Object User model
+$userModel = Object User model
 
 $qq = array Массив отделов для которых создается вопрос
 ```
