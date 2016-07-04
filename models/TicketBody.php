@@ -36,6 +36,7 @@ class TicketBody extends \yii\db\ActiveRecord
             [['text'], 'string'],
             [['date', 'name_user', 'id_head'], 'safe'],
             [['name_user'], 'string', 'max' => 255],
+            [['name_user', 'text'], 'filter', 'filter' => 'strip_tags'],
         ];
     }
 

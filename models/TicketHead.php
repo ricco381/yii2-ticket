@@ -47,6 +47,7 @@ class TicketHead extends \yii\db\ActiveRecord
             [['user_id', 'status'], 'integer'],
             [['date_update'], 'safe'],
             [['department', 'topic'], 'string', 'max' => 255],
+            [['department', 'topic'], 'filter', 'filter' => 'strip_tags'],
         ];
     }
 
