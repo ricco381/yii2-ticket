@@ -4,7 +4,8 @@
 ##### Вышла стабильная версия 1.0.2
 
 ```
-Установка composer require "ricco/yii2-ticket:1.0.2"
+Установка composer require "ricco/yii2-ticket:1.0.3"
+Обязателбно указать 
 ```
 
 # Добавление в проект
@@ -66,7 +67,7 @@ $mailSendAnswer = true на email пользователя будут отпра
 
 $mailSendClosed = true на email пользователя будут отправлятся уведомления о закрытии тикета
 
-$subjectAnswer = string Тиема email сообщения answer
+$subjectAnswer = string Тема email сообщения answer
 
 $subjectCloset = string Тема email сообщения closed
 
