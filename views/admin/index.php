@@ -35,8 +35,14 @@
                             'value'     => function ($model) {
                                 switch ($model->body['client']) {
                                     case 0 :
+                                        if ($model->status == \ricco\ticket\models\TicketHead::CLOSED) {
+                                            return '<div class="label label-success">Клиент</div>&nbsp;<div class="label label-default">Закрыт</div>';
+                                        }
                                         return '<div class="label label-success">Клиент</div>';
                                     case 1 :
+                                        if ($model->status == \ricco\ticket\models\TicketHead::CLOSED) {
+                                            return '<div class="label label-primary">Администратор</div>&nbsp;<div class="label label-default">Закрыт</div>';
+                                        }
                                         return '<div class="label label-primary">Администратор</div>';
                                 }
                             },
