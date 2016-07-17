@@ -1,5 +1,7 @@
 <?php
 /** @var \ricco\ticket\models\TicketHead $newTicket */
+use yii\helpers\Html;
+
 /** @var \ricco\ticket\models\TicketBody $thisTicket */
 ?>
 <div class="mainpanel">
@@ -33,7 +35,7 @@
                             <span><?=$ticket['name_user']?>&nbsp;<span style="font-size: 12px">(<?=($ticket['client'] == 1) ? 'Сотрудник' : 'Клиент'?>)</span></span>
                             <span class="pull-right"><?=$ticket['date']?></span>
                         </div> <div class="panel-body">
-                            <?=$ticket['text']?>
+                            <?=nl2br(Html::encode($ticket['text']))?>
                         </div>
                     </div>
                 <?php endforeach; ?>

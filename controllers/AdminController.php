@@ -123,9 +123,9 @@ class AdminController extends Controller
         $ticketHead = new TicketHead();
         $ticketBody = new TicketBody();
 
-        $user = $this->module->userModule;
+        $userModel = User::$user;
 
-        $users = $user::find()->select(['username as value', 'username as label', 'id as id'])->asArray()->all();
+        $users = $userModel::find()->select(['username as value', 'username as label', 'id as id'])->asArray()->all();
 
         if ($post = \Yii::$app->request->post()) {
             $ticketHead->load($post);
@@ -137,7 +137,7 @@ class AdminController extends Controller
                 $ticketBody->id_head = $ticketHead->primaryKey;
                 $ticketBody->save();
 
-                $this->refresh();
+                $this->redirect(Url::previous());
             }
         }
 
