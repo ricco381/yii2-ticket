@@ -3,11 +3,14 @@
 namespace ricco\ticket\controllers;
 
 use ricco\ticket\models\TicketBody;
+use ricco\ticket\models\TicketFile;
 use ricco\ticket\models\TicketHead;
+use ricco\ticket\models\UploadForm;
 use yii\filters\AccessControl;
 use yii\filters\AccessRule;
 use yii\helpers\Url;
 use yii\web\Controller;
+use yii\web\UploadedFile;
 
 /**
  * Default controller for the `ticket` module
@@ -56,26 +59,39 @@ class TicketController extends Controller
      */
     public function actionView($id)
     {
-        $thisTicket = TicketBody::find()->where(['id_head' => $id])->orderBy('date DESC')->all();
+        $thisTicket = TicketBody::find()->where(['id_head' => $id])->joinWith('file')->orderBy('date DESC')->all();
 
         if (!$thisTicket) {
             return $this->actionIndex();
         }
 
         $newTicket = new TicketBody();
+        $ticketFile = new TicketFile();
+
 
         if (\Yii::$app->request->post() && $newTicket->load(\Yii::$app->request->post()) && $newTicket->validate()) {
+
             $ticket = TicketHead::findOne($id);
             $ticket->status = 1;
             if ($ticket->save()) {
                 $newTicket->id_head = $id;
                 $newTicket->save();
+
+                $uploadForm = new UploadForm();
+                $uploadForm->imageFiles = UploadedFile::getInstances($ticketFile, 'fileName');
+                if ($uploadForm->upload()) {
+                    TicketFile::saveImage($newTicket, $uploadForm);
+                }
             }
 
             $this->redirect(Url::to());
         }
-
-        return $this->render('view', ['thisTicket' => $thisTicket, 'newTicket' => $newTicket]);
+        
+        return $this->render('view', [
+            'thisTicket' => $thisTicket,
+            'newTicket' => $newTicket,
+            'fileTicket' => $ticketFile
+        ]);
     }
 
     /**
@@ -92,6 +108,7 @@ class TicketController extends Controller
     {
         $ticketHead = new TicketHead();
         $ticketBody = new TicketBody();
+        $ticketFile = new TicketFile();
 
         if(\Yii::$app->request->post()) {
             $ticketHead->load(\Yii::$app->request->post());
@@ -101,10 +118,22 @@ class TicketController extends Controller
                 $ticketHead->save();
                 $ticketBody->id_head = $ticketHead->getPrimaryKey();
                 $ticketBody->save();
+
+                $uploadForm = new UploadForm();
+                $uploadForm->imageFiles = UploadedFile::getInstances($ticketFile, 'fileName');
+                if ($uploadForm->upload()) {
+                    TicketFile::saveImage($ticketBody, $uploadForm);
+                }
+
                 return $this->redirect(Url::previous());
             }
         }
 
-        return $this->render('open', ['ticketHead' => $ticketHead, 'ticketBody' => $ticketBody, 'qq' => $this->module->qq]);
+        return $this->render('open', [
+            'ticketHead' => $ticketHead,
+            'ticketBody' => $ticketBody,
+            'qq' => $this->module->qq,
+            'fileTicket' => $ticketFile,
+        ]);
     }
 }

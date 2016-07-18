@@ -26,6 +26,12 @@ $this->title = 'Support';
                     'style' => 'height: 150px; resize: none;'
                ])?>
         </div>
+        <div class="col-xs-12">
+            <?= $form->field($fileTicket, 'fileName[]')->fileInput([
+                'multiple' => true,
+                'accept'   => 'image/*',
+            ])->label(false); ?>
+        </div>
         <div class="text-center"><button class='btn btn-primary'>Отправить</button></div>
     <?php $form->end() ?>
     </div>
