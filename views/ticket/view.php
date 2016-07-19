@@ -15,6 +15,9 @@ $this->title = 'Support';
        aria-expanded="false" aria-controls="collapseExample">
         <i class="glyphicon glyphicon-pencil pull-left"></i><span>Ответ</span>
     </a>
+    <?php if ($error = Yii::$app->session->getFlash('error')) : ?>
+        <div class="alert alert-danger text-center" style="margin-top: 10px;"><?=$error?></div>
+    <?php endif; ?>
     <div class="collapse" id="collapseExample">
         <div class="well">
             <?php $form = \yii\widgets\ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
@@ -39,25 +42,15 @@ $this->title = 'Support';
                         style="font-size: 12px">(<?= ($ticket['client'] == 1) ? 'Сотрудник' : 'Клиент' ?>)</span></span>
                 <span class="pull-right"><?= $ticket['date'] ?></span>
             </div>
-            <div class="panel-body clearfix">
+            <div class="panel-body clearfix" style="word-wrap: break-word;">
                 <?= nl2br(Html::encode($ticket['text'])) ?>
                 <?php if (!empty($ticket->file)) : ?>
                     <hr>
                     <?php foreach ($ticket->file as $file) : ?>
-                        <button type="button" data-toggle="modal" data-target="#myModal_<?= $file->id?>"><img src="/fileTicket/<?= $file->fileName ?>" alt="..." class="img-thumbnail" width="50px"></button>
-                        <div id="myModal_<?= $file->id ?>" class="modal fade" tabindex="-1" role="dialog"
-                             aria-labelledby="myModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" style="width: 90%; background-size: contain;">
-                                <div class="modal-content">
-                                    <div class="modal-body">
-                                        <img src="/fileTicket/<?= $file->fileName ?>" style="width:100%; background-size: contain;">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <a href="/fileTicket/<?= $file->fileName ?>" target="_blank"><img
+                                src="/fileTicket/reduced/<?= $file->fileName ?> " alt="..." class="img-thumbnail"></a>
                     <?php endforeach; ?>
                 <?php endif; ?>
-
             </div>
         </div>
     <?php endforeach; ?>

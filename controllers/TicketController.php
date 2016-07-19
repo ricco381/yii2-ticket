@@ -67,21 +67,27 @@ class TicketController extends Controller
 
         $newTicket = new TicketBody();
         $ticketFile = new TicketFile();
-
-
+        
         if (\Yii::$app->request->post() && $newTicket->load(\Yii::$app->request->post()) && $newTicket->validate()) {
 
             $ticket = TicketHead::findOne($id);
             $ticket->status = 1;
-            if ($ticket->save()) {
+
+            $uploadForm = new UploadForm();
+            $uploadForm->imageFiles = UploadedFile::getInstances($ticketFile, 'fileName');
+
+            if ($ticket->save() && $uploadForm->upload()) {
                 $newTicket->id_head = $id;
                 $newTicket->save();
 
-                $uploadForm = new UploadForm();
-                $uploadForm->imageFiles = UploadedFile::getInstances($ticketFile, 'fileName');
-                if ($uploadForm->upload()) {
-                    TicketFile::saveImage($newTicket, $uploadForm);
-                }
+                TicketFile::saveImage($newTicket, $uploadForm);
+            } else {
+                \Yii::$app->session->setFlash('error', $uploadForm->firstErrors['imageFiles']);
+                return $this->render('view', [
+                    'thisTicket' => $thisTicket,
+                    'newTicket' => $newTicket,
+                    'fileTicket' => $ticketFile
+                ]);
             }
 
             $this->redirect(Url::to());

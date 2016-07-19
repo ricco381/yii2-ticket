@@ -42,7 +42,7 @@ class AdminController extends Controller
      */
     public function actionAnswer($id)
     {
-        $thisTicket = TicketBody::find()->where(['id_head' => $id])->asArray()->orderBy('date DESC')->all();
+        $thisTicket = TicketBody::find()->where(['id_head' => $id])->joinWith('file')->asArray()->orderBy('date DESC')->all();
         $newTicket = new TicketBody();
 
         if (\Yii::$app->request->post()) {

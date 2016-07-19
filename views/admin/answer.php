@@ -21,7 +21,7 @@ use yii\helpers\Html;
                 </a>
                 <div class="collapse" id="collapseExample">
                     <div class="well">
-                        <?php $form = \yii\widgets\ActiveForm::begin([]) ?>
+                        <?php $form = \yii\widgets\ActiveForm::begin() ?>
                         <?=$form->field($newTicket, 'text')->textarea(['style' => 'height: 150px; resize: none;'])->label('Сообщение')->error()?>
                         <div class="text-center"><button class='btn btn-primary'>Отправить</button></div>
                         <?=$form->errorSummary($newTicket)?>
@@ -36,6 +36,13 @@ use yii\helpers\Html;
                             <span class="pull-right"><?=$ticket['date']?></span>
                         </div> <div class="panel-body">
                             <?=nl2br(Html::encode($ticket['text']))?>
+                            <?php if (!empty($ticket['file'])) : ?>
+                                <hr>
+                                <?php foreach ($ticket['file'] as $file) : ?>
+                                    <a href="/fileTicket/<?= $file['fileName'] ?>" target="_blank"><img
+                                            src="/fileTicket/reduced/<?= $file['fileName'] ?> " alt="..." class="img-thumbnail"></a>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
                         </div>
                     </div>
                 <?php endforeach; ?>
