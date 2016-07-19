@@ -8,7 +8,7 @@
 ```
 
 ```
-Установка composer require "ricco/yii2-ticket:1.0.3"
+Установка composer require "ricco/yii2-ticket:1.0.4"
 ```
 
 # Добавление в проект
