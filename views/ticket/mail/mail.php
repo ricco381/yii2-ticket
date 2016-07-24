@@ -1,7 +1,6 @@
 <?php
 use ricco\ticket\models\TicketHead;
 ?>
-
 <p style="text-align: center;"><img src="http://wallbtc.com/img/logo.png" alt=""/></p>
 <p style="text-align: left; font-size: 14px;"><?= \yii\bootstrap\Html::encode($textTicket)?></p>
 <hr/>

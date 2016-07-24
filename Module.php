@@ -15,17 +15,11 @@ class Module extends \yii\base\Module
      */
     public $controllerNamespace = 'ricco\ticket\controllers';
 
-    /** @var bool Уведомление пользователя об ответе на тикет */
-    public $mailSendAnswer = false;
-
-    /** @var bool Уведомление пользователя о закрытии тикета */
-    public $mailSendClosed = false;
+    /** @var bool Уведомление на почту о тикетах */
+    public $mailSend = false;
 
     /** @var string Тема email сообщения когда пользователю приходит ответ */
-    public $subjectAnswer = 'Ответ на тикет';
-
-    /** @var string Тема email сообщения когда тикет пользователя закрыт */
-    public $subjectCloset = 'Ваш тикет был закрыт';
+    public $subjectAnswer = 'Ответ на тикет сайта WallBtc.com';
 
     /** @var  User */
     public $userModel = false;

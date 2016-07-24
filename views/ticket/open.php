@@ -3,7 +3,6 @@ $this->title = 'Support';
 
 /** @var \ricco\ticket\models\TicketHead $ticketHead */
 /** @var \ricco\ticket\models\TicketBody $ticketBody */
-
 ?>
 <div class="text_block2">
     <div class="col-sx-12">

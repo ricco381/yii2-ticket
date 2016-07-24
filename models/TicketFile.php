@@ -60,9 +60,16 @@ class TicketFile extends \yii\db\ActiveRecord
     {
         return $this->hasOne(TicketBody::className(), ['id' => 'id_body']);
     }
-    
+
+    /**
+     * @param $ticket
+     * @param $uploadForm UploadForm
+     */
     public static function saveImage($ticket, $uploadForm)
     {
+        if ($uploadForm->getName() == null) {
+            return false;
+        }
         
         foreach ($uploadForm->getName() as $file) {
             $ticketFile = new TicketFile();

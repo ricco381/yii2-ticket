@@ -1,10 +1,14 @@
 # yii2-ticket
 Тикет система для yii2
 
-##### Вышла стабильная версия 1.0.4
+##### Вышла стабильная версия 1.0.5
 ```
+1.0.5
+    Убраны уведомления о закрытых тикетах.
+    Убран лишний код.
+    Отправка почты перенесена в модель
 1.0.4 
-    Добавлена загрузка картинок.      
+    Добавлена загрузка картинок.
 ```
 
 ```
@@ -66,13 +70,9 @@ yii migrate --migrationPath=@vendor/ricco/yii2-ticket/migrations
 
 # Ностройка модуля
 ```
-$mailSendAnswer = true на email пользователя будут отправлятся уведомления об ответе
-
-$mailSendClosed = true на email пользователя будут отправлятся уведомления о закрытии тикета
+$mailSendAnswer = true на email будут отправлятся уведомления об ответе
 
 $subjectAnswer = string Тема email сообщения answer
-
-$subjectCloset = string Тема email сообщения closed
 
 $userModel = Object User model
 

@@ -54,21 +54,8 @@ class AdminController extends Controller
                 $ticketHead->status = TicketHead::ANSWER;
 
                 if ($ticketHead->save()) {
-                    if ($this->module->mailSendAnswer !== false) {
-                        $userModel = User::$user;
-                        (new Mailer())
-                            ->sendMailDataTicket($ticketHead['topic'], $ticketHead['status'], $newTicket->id_head,
-                                $newTicket->text)
-                            ->setDataFrom($userModel::findOne([
-                                'id' => $ticketHead->user_id,
-                            ])['email'],
-                                $this->module->subjectAnswer
-                            )
-                            ->senda('answer');
-                    }
+                    return $this->redirect(Url::to()); 
                 }
-
-                return $this->redirect(Url::to());
             }
         }
 
@@ -88,20 +75,7 @@ class AdminController extends Controller
 
         $model->status = TicketHead::CLOSED;
 
-        if ($model->save()) {
-            if ($this->module->mailSendClosed !== false) {
-                $userModel = User::$user;
-
-                (new Mailer())
-                    ->sendMailDataTicket($model->department, $model->status, $model->id)
-                    ->setDataFrom($userModel::findOne([
-                        'id' => $model->user_id,
-                    ])['email'],
-                        $this->module->subjectCloset
-                    )
-                    ->senda('closed');
-            }
-        }
+        $model->save();
 
         return $this->redirect(Url::previous());
     }
@@ -128,9 +102,12 @@ class AdminController extends Controller
         $users = $userModel::find()->select(['username as value', 'username as label', 'id as id'])->asArray()->all();
 
         if ($post = \Yii::$app->request->post()) {
+            
             $ticketHead->load($post);
             $ticketBody->load($post);
+            
             if ($ticketHead->validate() && $ticketBody->validate()) {
+                
                 $ticketHead->user = $post['TicketHead']['user_id'];
                 $ticketHead->status = TicketHead::ANSWER;
                 $ticketHead->save();
