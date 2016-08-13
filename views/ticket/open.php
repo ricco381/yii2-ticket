@@ -6,7 +6,7 @@ $this->title = 'Support';
 ?>
 <div class="text_block2">
     <div class="col-sx-12">
-        <a class="btn btn-primary" href="<?=\yii\helpers\Url::to(['/ticket/ticket/index'])?>" style="margin-bottom: 10px">Назад</a>
+        <a class="btn btn-primary" href="<?=\yii\helpers\Url::toRoute(['ticket/index'])?>" style="margin-bottom: 10px">Назад</a>
     <?php $form = \yii\widgets\ActiveForm::begin([]) ?>
         <div class="col-xs-12">
             <?=$form->field($ticketBody, 'name_user')->textInput([

@@ -11,7 +11,7 @@
         </div><!-- media -->
     </div><!-- pageheader -->
     <div class="contentpanel">
-        <a href="<?=\yii\helpers\Url::to(['/ticket/admin/open'])?>" class="btn btn-default">Написать</a>
+        <a href="<?=\yii\helpers\Url::toRoute(['admin/open'])?>" class="btn btn-default">Написать</a>
         <br><br>
         <div class="container-fluid">
             <div class="col-md-12">
@@ -61,12 +61,12 @@
                             'buttons'       => [
                                 'update' => function ($url, $model) {
                                     return \yii\helpers\Html::a('Ответить',
-                                        \yii\helpers\Url::to(['/ticket/admin/answer']) . "?id=" . $model['id'],
+                                        \yii\helpers\Url::toRoute(['admin/answer'. 'id' => $model['id']]),
                                         ['class' => 'btn-xs btn-info']);
                                 },
                                 'delete' => function ($url, $model) {
                                     return \yii\helpers\Html::a('Удалить',
-                                        \yii\helpers\Url::to(['/ticket/admin/delete']) . "?id=" . $model['id'],
+                                        \yii\helpers\Url::to(['admin/delete', 'id' => $model['id']]),
                                         [
                                             'class'   => 'btn-xs btn-danger',
                                             'onclick' => 'return confirm("Вы действительно хотите удалить?")',
@@ -75,7 +75,7 @@
                                 },
                                 'closed' => function ($url, $model) {
                                     return \yii\helpers\Html::a('Закрыть',
-                                        \yii\helpers\Url::to(['/ticket/admin/closed']) . "?id=" . $model['id'],
+                                        \yii\helpers\Url::to(['admin/closed', 'id' => $model['id']]),
                                         [
                                             'class'   => 'btn-xs btn-primary',
                                             'onclick' => 'return confirm("Вы действительно хотите закрыть тикет?")',

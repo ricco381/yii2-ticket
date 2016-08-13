@@ -11,13 +11,13 @@ $this->registerJs("
     $('td').click(function (e) {
         var id = $(this).closest('tr').data('id');
         if(e.target == this)
-            location.href = '" . Url::to(['/ticket/ticket/view']) . "?id=' + id;
+           location.href = '" . Url::toRoute(['ticket/view', 'id' => '']) . "' + id ;
     });
 
 ");
 ?>
 <div class="text_block2">
-    <a type="button" href="<?=Url::to(['/ticket/ticket/open'])?>" class="btn btn-primary pull-right">Открыть</a>
+    <a type="button" href="<?=Url::to(['ticket/open'])?>" class="btn btn-primary pull-right">Открыть</a>
     <div class="clearfix" style="margin-bottom: 10px"></div>
     <div>
         <?=\yii\grid\GridView::widget([

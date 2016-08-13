@@ -15,7 +15,7 @@ use yii\helpers\Html;
     <div class="contentpanel">
         <div class="container-fluid">
             <div class="col-md-12">
-                <a class="btn btn-primary" href="<?= \yii\helpers\Url::to(['/ticket/admin/index'])?>" style="margin-bottom: 10px">Назад</a>
+                <a class="btn btn-primary" href="<?= \yii\helpers\Url::toRoute(['admin/index'])?>" style="margin-bottom: 10px">Назад</a>
                 <a class="btn btn-primary" style="width: 100%" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                     <i class="glyphicon glyphicon-pencil pull-left"></i><span>Ответ</span>
                 </a>

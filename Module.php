@@ -32,16 +32,13 @@ class Module extends \yii\base\Module
         'Другое'            => 'Другое',
     ];
 
+    public $admin = 'admin';
+    
     /**
      * @inheritdoc
      */
     public function init()
     {
-        if (!file_exists(Yii::getAlias('@webroot') . "/fileTicket")) {
-            mkdir(Yii::getAlias('@webroot') . "/fileTicket");
-            mkdir(Yii::getAlias('@webroot') . "/fileTicket/reduced");
-        }
-        
         User::$user = ($this->userModel !== false) ? $this->userModel : Yii::$app->user->identityClass;
         parent::init();
     }

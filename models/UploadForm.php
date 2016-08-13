@@ -2,6 +2,7 @@
 
 namespace ricco\ticket\models;
 
+use Yii;
 use yii\base\Model;
 use yii\web\UploadedFile;
 
@@ -26,6 +27,11 @@ class UploadForm extends Model
     public function upload()
     {
         if ($this->validate()) {
+            if (!file_exists(Yii::getAlias('@webroot') . "/fileTicket")) {
+                mkdir(Yii::getAlias('@webroot') . "/fileTicket");
+                mkdir(Yii::getAlias('@webroot') . "/fileTicket/reduced");
+            }
+            
             foreach ($this->imageFiles as $file) {
                 $this->nameFile[] = md5($file->baseName . time()) . '.' . $file->extension;
                 $file->saveAs(self::DIR . md5($file->baseName . time()) . '.' . $file->extension);
