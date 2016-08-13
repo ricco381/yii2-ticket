@@ -34,7 +34,7 @@ class TicketHead extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'ticket_head';
+        return '{{%ticket_head}}';
     }
     
     /**

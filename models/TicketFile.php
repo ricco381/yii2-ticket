@@ -20,7 +20,7 @@ class TicketFile extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'ticket_file';
+        return '{{%ticket_file}}';
     }
 
     /**
@@ -63,7 +63,8 @@ class TicketFile extends \yii\db\ActiveRecord
 
     /**
      * @param $ticket
-     * @param $uploadForm UploadForm
+     * @param $uploadForm
+     * @return bool
      */
     public static function saveImage($ticket, $uploadForm)
     {

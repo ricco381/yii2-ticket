@@ -31,7 +31,7 @@ class TicketBody extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'ticket_body';
+        return '{{%ticket_body}}';
     }
 
     public function init()
