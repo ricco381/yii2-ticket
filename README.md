@@ -3,8 +3,11 @@
 
 Documentation in [English](https://github.com/ricco381/yii2-ticket/blob/master/README_EN.md)
 
-##### Вышла стабильная версия 1.0.6
+##### Вышла стабильная версия 1.0.7
 ```
+1.0.7
+    Изменен дизайн
+
 1.0.6
     Добавлено прикрепление изображений.
     Добавлен создание тикета из админки.
@@ -22,7 +25,7 @@ Documentation in [English](https://github.com/ricco381/yii2-ticket/blob/master/R
 ```
 
 ```
-Установка composer require "ricco/yii2-ticket:1.0.6"
+Установка composer require "ricco/yii2-ticket:1.0.7"
 ```
 
 # Добавление в проект
