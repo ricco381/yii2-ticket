@@ -1,9 +1,9 @@
 # yii2-ticket
 The ticket system for yii2
 
-##### Released stable version 1.0.6
+##### Released stable version 1.0.7
 ```
-1.0.6
+1.0.7
     Added attachment images.
     Added ticket creation from the admin panel.
     Add prefixo table.
@@ -20,7 +20,7 @@ The ticket system for yii2
 ```
 
 ```
-Install composer require "ricco/yii2-ticket:1.0.6"
+Install composer require "ricco/yii2-ticket:1.0.7"
 ```
 
 # Add to project
