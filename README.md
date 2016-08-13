@@ -1,7 +1,7 @@
 # yii2-ticket
 Тикет система для yii2
 
-Документация на [английском](https://github.com/ricco381/yii2-ticket/blob/master/README_EN.md)
+Documentation in [English](https://github.com/ricco381/yii2-ticket/blob/master/README_EN.md)
 
 ##### Вышла стабильная версия 1.0.6
 ```
