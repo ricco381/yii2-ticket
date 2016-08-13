@@ -26,15 +26,13 @@
 'ticket' => [
             'class'         => ricco\ticket\Module::className(),
         ],
-
+```
 **Обязательно добавить в AppAssets в секцию js ссылку на bootstrap.js**
 
 > public $js = [
 >        /** Другие скрипты */
 >        '//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js',
 >    ];
-
-```
 
 # Маршруты без ЧПУ
 ```
