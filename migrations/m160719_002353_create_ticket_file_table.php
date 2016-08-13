@@ -8,8 +8,8 @@ use yii\db\Migration;
 class m160719_002353_create_ticket_file_table extends Migration
 {
 
-    private $table = 'ticket_file';
-
+    private $table = '{{%ticket_file}}';
+    private $ticket_body = '{{%ticket_body}}';
     /**
      * @inheritdoc
      */
@@ -22,7 +22,7 @@ class m160719_002353_create_ticket_file_table extends Migration
         ]);
         
         $this->createIndex('i_id_body', $this->table, 'id_body');
-        $this->addForeignKey('fk_id_body', $this->table, 'id_body', 'ticket_body', 'id', 'CASCADE', 'CASCADE');
+        $this->addForeignKey('fk_id_body', $this->table, 'id_body', $this->ticket_body, 'id', 'CASCADE', 'CASCADE');
     }
 
     /**
@@ -31,6 +31,6 @@ class m160719_002353_create_ticket_file_table extends Migration
     public function down()
     {
         $this->dropForeignKey('fk_id_body', $this->table);
-        $this->dropTable('ticket_file_table');
+        $this->dropTable($this->table);
     }
 }

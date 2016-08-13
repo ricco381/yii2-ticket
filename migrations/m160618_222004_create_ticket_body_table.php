@@ -7,7 +7,8 @@ use yii\db\Migration;
  */
 class m160618_222004_create_ticket_body_table extends Migration
 {
-    private $table = 'ticket_body';
+    private $table = '{{%ticket_body}}';
+    private $ticket_head = '{{%ticket_head}}';
 
     /**
      * @inheritdoc
@@ -25,7 +26,7 @@ class m160618_222004_create_ticket_body_table extends Migration
 
         $this->createIndex('i_ticket_body', $this->table, 'id_head');
 
-        $this->addForeignKey('fk_ticket_body', $this->table, 'id_head', 'ticket_head', 'id', 'CASCADE', 'CASCADE');
+        $this->addForeignKey('fk_ticket_body', $this->table, 'id_head', $this->ticket_head, 'id', 'CASCADE', 'CASCADE');
     }
 
     /**

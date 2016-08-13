@@ -16,7 +16,7 @@
 ```
 
 ```
-Установка composer require "ricco/yii2-ticket:1.0.4"
+Установка composer require "ricco/yii2-ticket:1.0.6"
 ```
 
 # Добавление в проект
@@ -24,6 +24,11 @@
 'ticket' => [
             'class'         => ricco\ticket\Module::className(),
         ],
+```
+
+# Маршруты без ЧПУ
+```
+index.php?r=ticket/ticket/index
 ```
 
 # Переопределение класса
