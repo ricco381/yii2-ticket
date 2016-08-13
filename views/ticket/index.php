@@ -16,45 +16,50 @@ $this->registerJs("
 
 ");
 ?>
-<div class="text_block2">
-    <a type="button" href="<?=Url::to(['ticket/open'])?>" class="btn btn-primary pull-right">Открыть</a>
-    <div class="clearfix" style="margin-bottom: 10px"></div>
-    <div>
-        <?=\yii\grid\GridView::widget([
-            'dataProvider' => $dataProvider,
-            'rowOptions'   => function ($model) {
-                return ['data-id' => $model->id, 'class' => 'ticket'];
-            },
-            'columns' => [
-                'department',
-                'topic',
-                [
-                    'contentOptions' => [
-                        'style' => 'text-align:center;'
-                    ],
-                    'value' => function($model) {
-                        switch ($model['status']) {
-                            case TicketHead::OPEN :
-                                return '<div class="label label-default">Открыт</div>';
-                            case TicketHead::WAIT :
-                                return '<div class="label label-warning">Ожидание</div>';
-                            case TicketHead::ANSWER :
-                                return '<div class="label label-success">Отвечен</div>';
-                            case TicketHead::CLOSED :
-                                return '<div class="label label-info">Закрыт</div>';
-                        }
+<div class="panel page-block">
+    <div class="container-fluid row">
+        <div class="col-lg-12">
+            <a type="button" href="<?= Url::to(['ticket/open']) ?>" class="btn btn-primary pull-right"
+               style="margin-right: 10px">Открыть</a>
+            <div class="clearfix" style="margin-bottom: 10px"></div>
+            <div>
+                <?= \yii\grid\GridView::widget([
+                    'dataProvider' => $dataProvider,
+                    'rowOptions'   => function ($model) {
+                        return ['data-id' => $model->id, 'class' => 'ticket'];
                     },
-                    'format' => 'html'
-                ],
-                [
-                    'contentOptions' => [
-                        'style' => 'text-align:right; font-size:13px'
+                    'columns'      => [
+                        'department',
+                        'topic',
+                        [
+                            'contentOptions' => [
+                                'style' => 'text-align:center;',
+                            ],
+                            'value'          => function ($model) {
+                                switch ($model['status']) {
+                                    case TicketHead::OPEN :
+                                        return '<div class="label label-default">Открыт</div>';
+                                    case TicketHead::WAIT :
+                                        return '<div class="label label-warning">Ожидание</div>';
+                                    case TicketHead::ANSWER :
+                                        return '<div class="label label-success">Отвечен</div>';
+                                    case TicketHead::CLOSED :
+                                        return '<div class="label label-info">Закрыт</div>';
+                                }
+                            },
+                            'format'         => 'html',
+                        ],
+                        [
+                            'contentOptions' => [
+                                'style' => 'text-align:right; font-size:13px',
+                            ],
+                            'attribute'      => 'date_update',
+                            'value'          => "date_update",
+                        ],
                     ],
-                    'attribute' => 'date_update',
-                    'value' => "date_update",
-                ]
-            ]
-        ])?>
+                ]) ?>
+            </div>
+        </div>
     </div>
 </div>
 

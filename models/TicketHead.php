@@ -4,7 +4,9 @@ namespace ricco\ticket\models;
 
 use \ricco\ticket\models;
 use Yii;
+use yii\behaviors\TimestampBehavior;
 use yii\data\ActiveDataProvider;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "ticket_head".
@@ -50,6 +52,19 @@ class TicketHead extends \yii\db\ActiveRecord
             [['department', 'topic'], 'filter', 'filter' => 'strip_tags'],
         ];
     }
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'date_update',
+                'updatedAtAttribute' => 'date_update',
+                'value' => new Expression('NOW()'),
+            ],
+        ];
+    }
+
 
     /**
      * @inheritdoc
