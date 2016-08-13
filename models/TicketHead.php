@@ -2,9 +2,7 @@
 
 namespace ricco\ticket\models;
 
-use ricco\ticket\Mailer;
 use \ricco\ticket\models;
-use ricco\ticket\Module;
 use Yii;
 use yii\data\ActiveDataProvider;
 

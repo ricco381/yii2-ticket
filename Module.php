@@ -19,7 +19,7 @@ class Module extends \yii\base\Module
     public $mailSend = false;
 
     /** @var string Тема email сообщения когда пользователю приходит ответ */
-    public $subjectAnswer = 'Ответ на тикет сайта WallBtc.com';
+    public $subjectAnswer = 'Ответ на тикет сайта exemple.com';
 
     /** @var  User */
     public $userModel = false;
@@ -37,6 +37,11 @@ class Module extends \yii\base\Module
      */
     public function init()
     {
+        if (!file_exists(Yii::getAlias('@webroot') . "/fileTicket")) {
+            mkdir(Yii::getAlias('@webroot') . "/fileTicket");
+            mkdir(Yii::getAlias('@webroot') . "/fileTicket/reduced");
+        }
+        
         User::$user = ($this->userModel !== false) ? $this->userModel : Yii::$app->user->identityClass;
         parent::init();
     }
