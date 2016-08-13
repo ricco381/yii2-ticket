@@ -32,7 +32,8 @@ class Module extends \yii\base\Module
         'Другое'            => 'Другое',
     ];
 
-    public $admin = 'admin';
+    /** @var array Ники администраторав */
+    public $admin = ['admin'];
     
     /**
      * @inheritdoc

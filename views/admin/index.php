@@ -61,7 +61,7 @@
                             'buttons'       => [
                                 'update' => function ($url, $model) {
                                     return \yii\helpers\Html::a('Ответить',
-                                        \yii\helpers\Url::toRoute(['admin/answer'. 'id' => $model['id']]),
+                                        \yii\helpers\Url::toRoute(['admin/answer', 'id' => $model['id']]),
                                         ['class' => 'btn-xs btn-info']);
                                 },
                                 'delete' => function ($url, $model) {
