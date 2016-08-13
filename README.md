@@ -18,6 +18,7 @@ Documentation in [English](https://github.com/ricco381/yii2-ticket/blob/master/R
 
 1.0.4 
     Добавлена загрузка картинок.
+
 ```
 
 ```
