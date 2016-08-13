@@ -96,6 +96,8 @@ $subjectAnswer = string Тема email сообщения answer
 $userModel = Object User model
 
 $qq = array Массив отделов для которых создается вопрос
+
+$admin = ['admin'] массив администраторов
 ```
 
 # Публичная часть
