@@ -10,6 +10,15 @@
         <div class="col-md-12">
             <?= \yii\grid\GridView::widget([
                 'dataProvider' => $dataProvider,
+                'rowOptions'   => function ($model) {
+                    $background = '';
+                    if ($model->status == 0 || $model->status == 1) {
+                        $background = 'background:#E6E6FA';
+                    }
+                    return [
+                        'style'   => "cursor:pointer;" . $background,
+                    ];
+                },
                 'columns'      => [
                     [
                         'attribute' => 'userName',
