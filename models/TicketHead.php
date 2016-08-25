@@ -88,7 +88,7 @@ class TicketHead extends \yii\db\ActiveRecord
      */
     public function dataProviderUser()
     {
-        $query = TicketHead::find()->where("user_id = " . Yii::$app->user->id);
+        $query = TicketHead::find()->where("user_id = " . Yii::$app->user->id)->orderBy(["FIELD(`status`,  0,  1,  2, 3)" => SORT_ASC]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -109,7 +109,7 @@ class TicketHead extends \yii\db\ActiveRecord
      */
     public function dataProviderAdmin()
     {
-        $query = TicketHead::find()->joinWith('userName');
+        $query = TicketHead::find()->joinWith('userName')->orderBy(["FIELD(`status`,  0,  1,  2, 3)" => SORT_ASC]);
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => [
