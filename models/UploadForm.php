@@ -34,10 +34,10 @@ class UploadForm extends Model
             
             foreach ($this->imageFiles as $file) {
                 $this->nameFile[] = md5($file->baseName . time()) . '.' . $file->extension;
-                $file->saveAs(self::DIR . md5($file->baseName . time()) . '.' . $file->extension);
-                $this->resice(self::DIR . md5($file->baseName . time()) . '.' . $file->extension, 1024);
-                copy(self::DIR . md5($file->baseName . time()) . '.' . $file->extension, 'fileTicket/reduced/' . md5($file->baseName . time()) . '.' . $file->extension);
-                $this->resice(self::DIR_REDUCED . md5($file->baseName . time()) . '.' . $file->extension, 100);
+                $file->saveAs(Yii::getAlias('@webroot') . self::DIR . md5($file->baseName . time()) . '.' . $file->extension);
+                $this->resice(Yii::getAlias('@webroot') . self::DIR . md5($file->baseName . time()) . '.' . $file->extension, 1024);
+                copy(Yii::getAlias('@webroot') .self::DIR . md5($file->baseName . time()) . '.' . $file->extension, Yii::getAlias('@webroot') . '/fileTicket/reduced/' . md5($file->baseName . time()) . '.' . $file->extension);
+                $this->resice(Yii::getAlias('@webroot') . self::DIR_REDUCED . md5($file->baseName . time()) . '.' . $file->extension, 100);
             }
             return true;
         } else {
