@@ -14,8 +14,8 @@ class UploadForm extends Model
     public $imageFiles;
     public $nameFile;
 
-    const DIR = 'fileTicket/';
-    const DIR_REDUCED = 'fileTicket/reduced/';
+    const DIR = '/fileTicket/';
+    const DIR_REDUCED = '/fileTicket/reduced/';
 
     public function rules()
     {

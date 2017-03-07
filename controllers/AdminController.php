@@ -110,11 +110,12 @@ class AdminController extends Controller
                 
                 $ticketHead->user = $post['TicketHead']['user_id'];
                 $ticketHead->status = TicketHead::ANSWER;
-                $ticketHead->save();
-                $ticketBody->id_head = $ticketHead->primaryKey;
-                $ticketBody->save();
+                if ($ticketHead->save()) {
+                    $ticketBody->id_head = $ticketHead->primaryKey;
+                    $ticketBody->save();
 
-                $this->redirect(Url::previous());
+                    $this->redirect(Url::previous());
+                }
             }
         }
 

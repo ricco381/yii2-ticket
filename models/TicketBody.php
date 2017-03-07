@@ -87,7 +87,7 @@ class TicketBody extends \yii\db\ActiveRecord
         /**
          * Отправка уведомлений
          */
-        if ($this->module->mailSend !== false) {
+        if ($this->module->mailSend !== false && $ticketHead->status != TicketHead::CLOSED) {
             $userModel = User::$user;
             (new Mailer())
                 ->sendMailDataTicket($ticketHead->topic, $ticketHead->status, $ticketHead->id,

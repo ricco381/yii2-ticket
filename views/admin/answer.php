@@ -30,7 +30,7 @@ use yii\helpers\Html;
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <span><?= $ticket['name_user'] ?>&nbsp;<span
-                                style="font-size: 12px">(<?= ($ticket['client'] == 1) ? 'Сотрудник' : 'Клиент' ?>
+                                    style="font-size: 12px">(<?= ($ticket['client'] == 1) ? 'Сотрудник' : 'Клиент' ?>
                                 )</span></span>
                         <span class="pull-right"><?= $ticket['date'] ?></span>
                     </div>
@@ -40,8 +40,8 @@ use yii\helpers\Html;
                             <hr>
                             <?php foreach ($ticket['file'] as $file) : ?>
                                 <a href="/fileTicket/<?= $file['fileName'] ?>" target="_blank"><img
-                                        src="/fileTicket/reduced/<?= $file['fileName'] ?> " alt="..."
-                                        class="img-thumbnail"></a>
+                                            src="/fileTicket/reduced/<?= $file['fileName'] ?> " alt="..."
+                                            class="img-thumbnail"></a>
                             <?php endforeach; ?>
                         <?php endif; ?>
                     </div>

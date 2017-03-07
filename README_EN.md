@@ -1,6 +1,12 @@
 # yii2-ticket
 The ticket system for yii2
 
+##### The stable version 1.0.8 has been released
+```
+1.0.8
+     Minor changes
+```
+
 ##### Released stable version 1.0.7
 ```
 1.0.7
@@ -23,7 +29,7 @@ The ticket system for yii2
 ```
 
 ```
-Install composer require "ricco/yii2-ticket:1.0.7"
+Install composer require "ricco/yii2-ticket:1.0.8"
 ```
 
 # Add to project
