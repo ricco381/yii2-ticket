@@ -90,6 +90,10 @@ class TicketController extends Controller
                 ]);
             }
 
+            if (\Yii::$app->request->isAjax) {
+                return 'OK';
+            }
+
             $this->redirect(Url::to());
         }
         
@@ -129,6 +133,10 @@ class TicketController extends Controller
                     $uploadForm->imageFiles = UploadedFile::getInstances($ticketFile, 'fileName');
                     if ($uploadForm->upload()) {
                         TicketFile::saveImage($ticketBody, $uploadForm);
+                    }
+
+                    if (\Yii::$app->request->isAjax) {
+                        return 'OK';
                     }
 
                     return $this->redirect(Url::previous());
