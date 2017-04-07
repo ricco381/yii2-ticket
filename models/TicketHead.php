@@ -30,6 +30,7 @@ class TicketHead extends \yii\db\ActiveRecord
     const WAIT = 1;
     const ANSWER = 2;
     const CLOSED = 3;
+    const VIEWED = 4;
 
     /**
      * @inheritdoc

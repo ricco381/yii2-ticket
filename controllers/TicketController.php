@@ -59,9 +59,15 @@ class TicketController extends Controller
      */
     public function actionView($id)
     {
+        $ticket = TicketHead::findOne($id);
+        if ($ticket && $ticket->status == TicketHead::ANSWER) {
+            $ticket->status = TicketHead::VIEWED;
+            $ticket->save();
+        }
+
         $thisTicket = TicketBody::find()->where(['id_head' => $id])->joinWith('file')->orderBy('date DESC')->all();
 
-        if (!$thisTicket) {
+        if (!$ticket || !$thisTicket) {
             return $this->actionIndex();
         }
 
@@ -70,8 +76,7 @@ class TicketController extends Controller
         
         if (\Yii::$app->request->post() && $newTicket->load(\Yii::$app->request->post()) && $newTicket->validate()) {
 
-            $ticket = TicketHead::findOne($id);
-            $ticket->status = 1;
+            $ticket->status = TicketHead::WAIT;
 
             $uploadForm = new UploadForm();
             $uploadForm->imageFiles = UploadedFile::getInstances($ticketFile, 'fileName');
