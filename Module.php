@@ -34,7 +34,19 @@ class Module extends \yii\base\Module
 
     /** @var array Ники администраторав */
     public $admin = ['admin'];
-    
+
+    /** @var string  */
+    public $uploadFilesDirectory = '@webroot/fileTicket';
+
+    /** @var string  */
+    public $uploadFilesExtensions = 'png, jpg';
+
+    /** @var int  */
+    public $uploadFilesMaxFiles = 5;
+
+    /** @var null|int */
+    public $uploadFilesMaxSize = null;
+
     /**
      * @inheritdoc
      */

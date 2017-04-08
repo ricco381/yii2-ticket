@@ -5,6 +5,7 @@ namespace ricco\ticket\models;
 use Yii;
 use yii\base\Model;
 use yii\web\UploadedFile;
+use ricco\ticket\Module;
 
 class UploadForm extends Model
 {
@@ -14,37 +15,57 @@ class UploadForm extends Model
     public $imageFiles;
     public $nameFile;
 
-    const DIR = '/fileTicket/';
-    const DIR_REDUCED = '/fileTicket/reduced/';
+    /** @var  Module */
+    private $module;
+
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        $this->module = Module::getInstance();
+        parent::init();
+    }
 
     public function rules()
     {
         return [
-            [['imageFiles'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg', 'maxFiles' => 5],
+            [['imageFiles'], 'file',
+                'skipOnEmpty' => true,
+                'extensions' => $this->module->uploadFilesExtensions,
+                'maxFiles' => $this->module->uploadFilesMaxFiles,
+                'maxSize' => $this->module->uploadFilesMaxSize,
+            ],
         ];
     }
 
     public function upload()
     {
         if ($this->validate()) {
-            if (!file_exists(Yii::getAlias('@webroot') . "/fileTicket")) {
-                mkdir(Yii::getAlias('@webroot') . "/fileTicket");
-                mkdir(Yii::getAlias('@webroot') . "/fileTicket/reduced");
+            $dir = $this->module->uploadFilesDirectory;
+            $dirReduced = $this->module->uploadFilesDirectory.'/reduced';
+
+            if (!file_exists(Yii::getAlias($dir))) {
+                mkdir(Yii::getAlias($dir));
+                mkdir(Yii::getAlias($dirReduced));
             }
-            
+
             foreach ($this->imageFiles as $file) {
-                $this->nameFile[] = md5($file->baseName . time()) . '.' . $file->extension;
-                $file->saveAs(Yii::getAlias('@webroot') . self::DIR . md5($file->baseName . time()) . '.' . $file->extension);
-                $this->resice(Yii::getAlias('@webroot') . self::DIR . md5($file->baseName . time()) . '.' . $file->extension, 1024);
-                copy(Yii::getAlias('@webroot') .self::DIR . md5($file->baseName . time()) . '.' . $file->extension, Yii::getAlias('@webroot') . '/fileTicket/reduced/' . md5($file->baseName . time()) . '.' . $file->extension);
-                $this->resice(Yii::getAlias('@webroot') . self::DIR_REDUCED . md5($file->baseName . time()) . '.' . $file->extension, 100);
+                $hashName = md5($file->baseName . time()) . '.' . $file->extension;
+                $fullHashName = Yii::getAlias($dir) . '/'. $hashName;
+                $fullReducedHashName = Yii::getAlias($dirReduced) . '/'. $hashName;
+                $this->nameFile[] = $hashName;
+                $file->saveAs($fullHashName);
+                $this->resice($fullHashName, 1024);
+                copy($fullHashName, $fullReducedHashName);
+                $this->resice($fullReducedHashName, 100);
             }
             return true;
         } else {
             return false;
         }
     }
-    
+
     public function getName()
     {
         return $this->nameFile;
@@ -81,5 +102,5 @@ class UploadForm extends Model
 
         imagejpeg($idest, $src, 100);
     }
-    
+
 }
