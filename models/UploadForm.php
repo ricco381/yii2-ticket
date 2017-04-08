@@ -75,6 +75,10 @@ class UploadForm extends Model
     {
         $size = getimagesize($src);
 
+        if (!$size) {
+            return false;
+        }
+
         $format = strtolower(substr($size['mime'], strpos($size['mime'], '/')+1));
         $icfunc = "imagecreatefrom" . $format;
 
