@@ -54,7 +54,7 @@ class UploadForm extends Model
                 $hashName = md5($file->baseName . time()) . '.' . $file->extension;
                 $fullHashName = Yii::getAlias($dir) . '/'. $hashName;
                 $fullReducedHashName = Yii::getAlias($dirReduced) . '/'. $hashName;
-                $this->nameFile[] = $hashName;
+                $this->nameFile[] = ['real' => $hashName, 'document' => $file->baseName . '.' . $file->extension];
                 $file->saveAs($fullHashName);
                 $this->resice($fullHashName, 1024);
                 copy($fullHashName, $fullReducedHashName);
