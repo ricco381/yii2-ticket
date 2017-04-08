@@ -47,6 +47,9 @@ class Module extends \yii\base\Module
     /** @var null|int */
     public $uploadFilesMaxSize = null;
 
+    /** @var bool|int */
+    public $pageSize = false;
+
     /**
      * @inheritdoc
      */
