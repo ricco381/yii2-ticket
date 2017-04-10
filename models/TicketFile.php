@@ -10,6 +10,7 @@ use Yii;
  * @property integer    $id
  * @property integer    $id_body
  * @property string     $fileName
+ * @property string     $document_name
  *
  * @property TicketBody $idBody
  */
@@ -30,7 +31,7 @@ class TicketFile extends \yii\db\ActiveRecord
     {
         return [
             [['id_body'], 'integer'],
-            [['fileName'], 'string', 'max' => 255],
+            [['fileName','document_name'], 'string', 'max' => 255],
             [
                 ['id_body'],
                 'exist',
@@ -50,6 +51,7 @@ class TicketFile extends \yii\db\ActiveRecord
             'id'       => Yii::t('app', 'ID'),
             'id_body'  => Yii::t('app', 'Id Body'),
             'fileName' => Yii::t('app', 'File Name'),
+            'document_name' => Yii::t('app', 'Document name'),
         ];
     }
 
@@ -71,11 +73,12 @@ class TicketFile extends \yii\db\ActiveRecord
         if ($uploadForm->getName() == null) {
             return false;
         }
-        
+
         foreach ($uploadForm->getName() as $file) {
             $ticketFile = new TicketFile();
             $ticketFile->id_body = $ticket->primaryKey;
-            $ticketFile->fileName = $file;
+            $ticketFile->fileName = $file['real'];
+            $ticketFile->document_name = $file['document'];
             $ticketFile->save();
         }
     }
