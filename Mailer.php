@@ -59,9 +59,9 @@ class Mailer extends \yii\swiftmailer\Mailer
     /**
      * @param $view string Вит отображения email сообщения
      */
-    public function senda()
+    public function senda($view)
     {
-        $this->mail->compose('mail', [
+        $this->mail->compose($view, [
             'nameTicket' => $this->nameTicket,
             'textTicket' => $this->textTicket,
             'status' => $this->status,

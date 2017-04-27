@@ -35,6 +35,7 @@ class UploadForm extends Model
                 'extensions' => $this->module->uploadFilesExtensions,
                 'maxFiles' => $this->module->uploadFilesMaxFiles,
                 'maxSize' => $this->module->uploadFilesMaxSize,
+				'checkExtensionByMimeType' => false
             ],
         ];
     }
@@ -73,11 +74,11 @@ class UploadForm extends Model
 
     public function resice($src, $widthNew)
     {
-        $size = getimagesize($src);
-
-        if (!$size) {
+        if (!$this->isImage($src)) {
             return false;
         }
+		
+        $size = getimagesize($src);
 
         $format = strtolower(substr($size['mime'], strpos($size['mime'], '/')+1));
         $icfunc = "imagecreatefrom" . $format;
@@ -107,4 +108,10 @@ class UploadForm extends Model
         imagejpeg($idest, $src, 100);
     }
 
+	    protected function isImage($src)
+    {
+        $mimeType = mime_content_type($src);
+        return substr($mimeType, 0, 5) == 'image';
+    }
+	
 }
