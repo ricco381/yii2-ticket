@@ -76,6 +76,13 @@ class AdminController extends Controller
         $model->status = TicketHead::CLOSED;
 
         $model->save();
+		
+		if ($this->module->mailSend !== false) {
+            (new Mailer())
+                ->sendMailDataTicket($model->topic, $model->status, $model->id, '')
+                ->setDataFrom(Yii::$app->params['adminEmail'], $this->module->subjectAnswer)
+                ->senda('closed');
+        }
 
         return $this->redirect(Url::previous());
     }
