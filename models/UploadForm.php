@@ -35,6 +35,7 @@ class UploadForm extends Model
                 'extensions' => $this->module->uploadFilesExtensions,
                 'maxFiles' => $this->module->uploadFilesMaxFiles,
                 'maxSize' => $this->module->uploadFilesMaxSize,
+				'checkExtensionByMimeType' => false
             ],
         ];
     }
