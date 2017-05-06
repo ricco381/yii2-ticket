@@ -34,8 +34,7 @@ class UploadForm extends Model
                 'skipOnEmpty' => true,
                 'extensions' => $this->module->uploadFilesExtensions,
                 'maxFiles' => $this->module->uploadFilesMaxFiles,
-                'maxSize' => $this->module->uploadFilesMaxSize,
-				'checkExtensionByMimeType' => false
+                'maxSize' => $this->module->uploadFilesMaxSize
             ],
         ];
     }
