@@ -32,8 +32,8 @@ class Module extends \yii\base\Module
         'Другое'            => 'Другое',
     ];
 
-    /** @var array Ники администраторав */
-    public $admin = ['admin'];
+    /** @var array ID администраторов */
+    public $adminId = [];
 
     /** @var string  */
     public $uploadFilesDirectory = '@webroot/fileTicket';

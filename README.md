@@ -3,6 +3,15 @@
 
 Documentation in [English](https://github.com/ricco381/yii2-ticket/blob/master/README_EN.md)
 
+##### Вышла стабильная версия 2.0.0
+```
+2.0.0
+    Исправлены кодировки для mysql
+    Исправлен баг с просмотром любых тикетов
+    Добавлена возможность установки ID администратора для доступа в админ панель
+    Убран доступ в админку для всех кроме администратора
+```
+
 ##### Вышла стабильная версия 1.0.8
 ```
 1.0.8
@@ -36,9 +45,11 @@ Documentation in [English](https://github.com/ricco381/yii2-ticket/blob/master/R
 
 # Добавление в проект
 ```
-'ticket' => [
-            'class'         => ricco\ticket\Module::className(),
-        ],
+'modules' => [
+    'ticket' => [
+        'class'         => ricco\ticket\Module::className(),
+    ],
+],
 ```
 **Обязательно добавить в AppAssets в секцию js ссылку на bootstrap.js**
 ```

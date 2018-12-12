@@ -1,6 +1,15 @@
 # yii2-ticket
 The ticket system for yii2
 
+##### Stable version 2.0.0 released
+```
+2.0.0
+     Fixed encodings for mysql
+     Fixed bug with viewing any tickets
+     Added the ability to set the administrator ID for access to the admin panel
+     Removed
+```
+
 ##### The stable version 1.0.8 has been released
 ```
 1.0.8
@@ -34,9 +43,11 @@ Install composer require "ricco/yii2-ticket:1.0.8"
 
 # Add to project
 ```
-'ticket' => [
-            'class'         => ricco\ticket\Module::className(),
-        ],
+'modules' => [
+    'ticket' => [
+        'class'         => ricco\ticket\Module::className(),
+    ],
+],
 ```
 **Be sure to add in AppAssets section in js the link on bootstrap.js**
 ```

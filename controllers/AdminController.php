@@ -16,6 +16,32 @@ use yii\web\Controller;
  */
 class AdminController extends Controller
 {
+
+    /**
+     * @return array
+     */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'matchCallback' => function ($rule, $action) {
+                            if (!in_array(Yii::$app->user->getId(), $this->module->adminId)) {
+                                return false;
+                            }
+
+                            return true;
+                        }
+                    ],
+                ],
+
+            ],
+        ];
+    }
+
     /**
      * Выдорка всех тикетов
      * Сортировка по полю дата в обратном порядке
@@ -54,7 +80,7 @@ class AdminController extends Controller
                 $ticketHead->status = TicketHead::ANSWER;
 
                 if ($ticketHead->save()) {
-                    return $this->redirect(Url::to()); 
+                    return $this->redirect(Url::to());
                 }
             }
         }
@@ -76,8 +102,8 @@ class AdminController extends Controller
         $model->status = TicketHead::CLOSED;
 
         $model->save();
-		
-		if ($this->module->mailSend !== false) {
+
+        if ($this->module->mailSend !== false) {
             (new Mailer())
                 ->sendMailDataTicket($model->topic, $model->status, $model->id, '')
                 ->setDataFrom(Yii::$app->params['adminEmail'], $this->module->subjectAnswer)
@@ -109,12 +135,12 @@ class AdminController extends Controller
         $users = $userModel::find()->select(['username as value', 'username as label', 'id as id'])->asArray()->all();
 
         if ($post = \Yii::$app->request->post()) {
-            
+
             $ticketHead->load($post);
             $ticketBody->load($post);
-            
+
             if ($ticketHead->validate() && $ticketBody->validate()) {
-                
+
                 $ticketHead->user = $post['TicketHead']['user_id'];
                 $ticketHead->status = TicketHead::ANSWER;
                 if ($ticketHead->save()) {

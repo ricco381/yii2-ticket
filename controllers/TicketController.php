@@ -21,30 +21,19 @@ class TicketController extends Controller
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
+                'class'      => AccessControl::className(),
                 'ruleConfig' => [
                     'class' => AccessRule::className(),
                 ],
-                'rules' => [
+                'rules'      => [
                     [
                         'actions' => ['index', 'view', 'open'],
-                        'allow' => true,
-                        'roles' => ['@'],
+                        'allow'   => true,
+                        'roles'   => ['@'],
                     ],
                 ],
             ],
         ];
-    }
-
-    /**
-     * Renders the index view for the module
-     * @return string
-     */
-    public function actionIndex()
-    {
-        $dataProvider = (new TicketHead())->dataProviderUser();
-        Url::remember();
-        return $this->render('index', ['dataProvider' => $dataProvider]);
     }
 
     /**
@@ -53,13 +42,16 @@ class TicketController extends Controller
      * Создаем экземпляр новой модели тикета
      * К нам пришел пост делаем загрузку в модель и проходим валидацию, если все хорошо делаем выборку шапки, меняем ей статус и сохраняем
      * Записываем id тикета новому ответу чтоб не потерялся и сохроняем новый ответ
-     * 
+     *
      * @param $id
      * @return string
      */
     public function actionView($id)
     {
-        $ticket = TicketHead::findOne($id);
+        $ticket = TicketHead::findOne([
+            'id'      => $id,
+            'user_id' => \Yii::$app->user->id,
+        ]);
         if ($ticket && $ticket->status == TicketHead::ANSWER) {
             $ticket->status = TicketHead::VIEWED;
             $ticket->save();
@@ -73,7 +65,7 @@ class TicketController extends Controller
 
         $newTicket = new TicketBody();
         $ticketFile = new TicketFile();
-        
+
         if (\Yii::$app->request->post() && $newTicket->load(\Yii::$app->request->post()) && $newTicket->validate()) {
 
             $ticket->status = TicketHead::WAIT;
@@ -88,10 +80,11 @@ class TicketController extends Controller
                 TicketFile::saveImage($newTicket, $uploadForm);
             } else {
                 \Yii::$app->session->setFlash('error', $uploadForm->firstErrors['imageFiles']);
+
                 return $this->render('view', [
                     'thisTicket' => $thisTicket,
-                    'newTicket' => $newTicket,
-                    'fileTicket' => $ticketFile
+                    'newTicket'  => $newTicket,
+                    'fileTicket' => $ticketFile,
                 ]);
             }
 
@@ -101,12 +94,25 @@ class TicketController extends Controller
 
             $this->redirect(Url::to());
         }
-        
+
         return $this->render('view', [
             'thisTicket' => $thisTicket,
-            'newTicket' => $newTicket,
-            'fileTicket' => $ticketFile
+            'newTicket'  => $newTicket,
+            'fileTicket' => $ticketFile,
         ]);
+    }
+
+    /**
+     * Renders the index view for the module
+     *
+     * @return string
+     */
+    public function actionIndex()
+    {
+        $dataProvider = (new TicketHead())->dataProviderUser();
+        Url::remember();
+
+        return $this->render('index', ['dataProvider' => $dataProvider]);
     }
 
     /**
@@ -116,7 +122,7 @@ class TicketController extends Controller
      * Делаем рендеринг страницы
      * Если post, проводим загрузку данных в модели, делаем валидацию
      * Сохраняем сначало шапку, узнаем его id, этот id присваеваем телу сообщения чтоб не потерялось и сохраняем
-     * 
+     *
      * @return string|\yii\web\Response
      */
     public function actionOpen()
@@ -125,7 +131,7 @@ class TicketController extends Controller
         $ticketBody = new TicketBody();
         $ticketFile = new TicketFile();
 
-        if(\Yii::$app->request->post()) {
+        if (\Yii::$app->request->post()) {
             $ticketHead->load(\Yii::$app->request->post());
             $ticketBody->load(\Yii::$app->request->post());
 
@@ -152,7 +158,7 @@ class TicketController extends Controller
         return $this->render('open', [
             'ticketHead' => $ticketHead,
             'ticketBody' => $ticketBody,
-            'qq' => $this->module->qq,
+            'qq'         => $this->module->qq,
             'fileTicket' => $ticketFile,
         ]);
     }

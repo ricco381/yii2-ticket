@@ -15,6 +15,13 @@ class m160618_215837_create_ticket_head_table extends Migration
      */
     public function up()
     {
+        $tableOptions = null;
+        
+        if ($this->db->driverName == 'mysql') {
+            // http://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
+            $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
+        }
+        
         $this->createTable($this->table, [
             'id'          => $this->primaryKey(),
             'user_id'     => $this->integer()->notNull(),
@@ -22,7 +29,7 @@ class m160618_215837_create_ticket_head_table extends Migration
             'topic'       => $this->string(255),
             'status'      => $this->integer(1)->defaultValue('0')->unsigned(),
             'date_update' => $this->timestamp()->defaultValue(null),
-        ]);
+        ], $tableOptions);
 
         $this->createIndex('i_ticket_head', $this->table, 'user_id');
 
