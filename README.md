@@ -40,7 +40,7 @@ Documentation in [English](https://github.com/ricco381/yii2-ticket/blob/master/R
 ```
 
 ```
-Установка composer require "ricco/yii2-ticket:1.0.8"
+Установка composer require "ricco/yii2-ticket:2.0.0"
 ```
 
 # Добавление в проект
