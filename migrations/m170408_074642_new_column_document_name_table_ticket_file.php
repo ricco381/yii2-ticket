@@ -12,7 +12,7 @@ class m170408_074642_new_column_document_name_table_ticket_file extends Migratio
 
     public function down()
     {
-        $this->dropColumn('document_name', '{{%ticket_file}}','document_name');
+        $this->dropColumn('{{%ticket_file}}', 'document_name');
     }
 
 }
